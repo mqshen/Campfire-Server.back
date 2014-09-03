@@ -133,6 +133,8 @@ object CampfireServer extends App with CampfireSslConfiguration {
                 userAuth.copy(userName = value)
               case (userAuth, ("password", value: String)) =>
                 userAuth.copy(password = value)
+              case (userAuth, _) =>
+                userAuth
             }
             val f = mongoActor ? userAuth
             val currentSender = sender()
@@ -302,7 +304,7 @@ object CampfireServer extends App with CampfireSslConfiguration {
                     //                    }
                     //                    import TheJsonProtocol._
                     import campfire.database.OperationSyncFormat._
-                    val content = buildContactsResult(Json.toJson(operations)).toString()
+                    val content = buildSyncResult(Json.toJson(operations)).toString()
                     resolver ! SendMessage(event.sessionId, "testendpoint", content)
                 }
                 f onFailure {

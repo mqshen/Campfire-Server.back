@@ -11,7 +11,7 @@ object JsonResult {
     Json.obj("ret" -> 0, "errMsg" -> "", "content" -> content)
   }
 
-  def buildContactsResult(content: JsValue): JsValue = {
-    Json.obj("name" -> "contacts", "content" -> content)
+  def buildSyncResult(content: JsValue): JsValue = {
+    Json.obj("name" -> "sync", "content" -> content)
   }
 }

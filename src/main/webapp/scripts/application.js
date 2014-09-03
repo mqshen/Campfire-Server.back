@@ -102,10 +102,47 @@ $(function(){
             }
         }
         else {
-            initMembers(response.content)
+            for (var i in response.content) {
+                var content = response.content[i]
+                if (content.syncType === "user") {
+                    if(content.operation === "add") {
+                        addMember(content.content)
+                    }
+                }
+            }
+            //initMembers(response.content)
         }
     }
 
+    function addMember(member) {
+        var user = '<div class="chatListColumn" username="' + member.userName + '" id="conv_filehelper">' +
+            '<div class="clicked" style="display:none;"></div>' +
+            '    <span class="unreadDot" style="display:none">0</span>' +
+            '    <span class="unreadDotS" style="display:none"></span>' +
+            '    <div class="avatar_wrap">' +
+            '        <img class="avatar" src=""  click1="showProfile@.chatListColumn">' +
+            '        </div>' +
+            '        <div class="extend">' +
+            '            <p class="time">15:18</p>' +
+            '            <div class="edited">' +
+            '                <i class="editedIcon"></i>' +
+            '            </div>' +
+            '            <div class="mute" style="display:none;"></div>' +
+            '        </div>' +
+            '        <div class="info">' +
+            '            <div class="nickName">' +
+            '                <div class="left name" style="">' + member.nickName + '</div>' +
+            '                <div class="clr"></div>' +
+            '            </div>' +
+            '            <div class="descWrapper">' +
+            '                <p class="desc"></p>' +
+            '            </div>' +
+            '        </div>' +
+            '        <div class="clr"></div>' +
+            '</div'
+        $('#conversationContainer').append(user)
+
+    }
     function initMembers(memberList) {
         for(var i in memberList) {
             var member = memberList[i]
