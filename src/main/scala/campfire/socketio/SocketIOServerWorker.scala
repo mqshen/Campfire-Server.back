@@ -2,13 +2,13 @@ package campfire.socketio
 
 import java.util.UUID
 
-import akka.actor.{PoisonPill, ActorRef, Actor, ActorLogging}
+import akka.actor.{ PoisonPill, ActorRef, Actor, ActorLogging }
 import akka.io.Tcp
 import campfire.session.Session
 import spray.can.server.UHttp
-import spray.can.{Http, websocket}
+import spray.can.{ Http, websocket }
 import campfire.socketio
-import campfire.socketio.transport.{XhrPolling, WebSocket, Transport}
+import campfire.socketio.transport.{ XhrPolling, WebSocket, Transport }
 import spray.http.HttpRequest
 
 import scala.concurrent.Future
@@ -68,7 +68,9 @@ trait SocketIOServerWorker extends ActorLogging { _: Actor =>
         case wsFailure: websocket.HandshakeFailure =>
           sender() ! wsFailure.response
         case wsContext: websocket.HandshakeContext =>
-          sender() ! UHttp.UpgradeServer(websocket.pipelineStage(self, wsContext), wsContext.response)
+          val server = UHttp.UpgradeServer(websocket.pipelineStage(self, wsContext), wsContext.response)
+          println(server)
+          sender() ! server
           socketio.wsConnecting(wsContext.request) foreach { _ =>
             socketioTransport = Some(WebSocket)
             log.debug("socketio connection of {} connected on websocket.", serverConnection.path)

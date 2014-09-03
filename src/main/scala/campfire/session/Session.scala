@@ -1,7 +1,5 @@
 package campfire.session
 
-import campfire.database.models.User
-
 /**
  * Created by goldratio on 8/7/14.
  */

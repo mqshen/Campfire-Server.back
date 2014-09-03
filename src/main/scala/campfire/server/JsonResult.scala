@@ -1,6 +1,6 @@
 package campfire.server
 
-import spray.json.{ JsString, JsNumber, JsObject, JsValue }
+import play.api.libs.json._
 
 /**
  * Created by GoldRatio on 8/2/14.
@@ -8,13 +8,10 @@ import spray.json.{ JsString, JsNumber, JsObject, JsValue }
 object JsonResult {
 
   def buildSuccessResult(content: JsValue): JsValue = {
-    new JsObject(Map("ret" -> JsNumber(0),
-      "errMsg" -> JsString(""),
-      "content" -> content))
+    Json.obj("ret" -> 0, "errMsg" -> "", "content" -> content)
   }
 
   def buildContactsResult(content: JsValue): JsValue = {
-    new JsObject(Map("name" -> JsString("contacts"),
-      "content" -> content))
+    Json.obj("name" -> "contacts", "content" -> content)
   }
 }

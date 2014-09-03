@@ -3,7 +3,7 @@ package campfire.socketio
 import akka.actor._
 import akka.pattern.ask
 import akka.contrib.pattern.DistributedPubSubMediator.{ Publish, Subscribe, SubscribeAck, Unsubscribe }
-import akka.contrib.pattern.{ClusterReceptionistExtension, ClusterSharding, ClusterClient, ShardRegion}
+import akka.contrib.pattern.{ ClusterReceptionistExtension, ClusterSharding, ClusterClient, ShardRegion }
 import akka.contrib.pattern.ShardRegion.Passivate
 import akka.io.Tcp
 import akka.event.LoggingAdapter

@@ -165,7 +165,7 @@ $(function(){
     function initSocket() {
         socket1 = io.connect('//localhost:8080/testendpoint');
         socket1.on('connect', function() {
-            socket1.emit("contacts");
+            socket1.emit("sync", 0);
             console.log("connected!");
             $('#messages').append('<li>' + 'connected' + '</li>');
         });

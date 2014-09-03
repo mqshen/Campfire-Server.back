@@ -3,20 +3,20 @@ package campfire.socketio.serializer
 import java.nio.ByteOrder
 
 import akka.actor.ExtendedActorSystem
-import akka.serialization.{Serialization, Serializer}
-import akka.util.{ByteString, ByteIterator, ByteStringBuilder}
-import spray.can.websocket.frame.{FrameParser, FrameRender, Frame}
+import akka.serialization.{ Serialization, Serializer }
+import akka.util.{ ByteString, ByteIterator, ByteStringBuilder }
+import spray.can.websocket.frame.{ FrameParser, FrameRender, Frame }
 import campfire.socketio.ConnectionActive._
-import campfire.socketio.{ConnectionActive, ConnectionContext}
-import campfire.socketio.packet.{DataPacket, PacketParser, Packet}
+import campfire.socketio.{ ConnectionActive, ConnectionContext }
+import campfire.socketio.packet.{ DataPacket, PacketParser, Packet }
 import campfire.socketio.transport
 import campfire.socketio.transport.Transport
-import spray.http.{HttpOrigin, StringRendering}
+import spray.http.{ HttpOrigin, StringRendering }
 import spray.http.Uri.Query
 
 import scala.collection.immutable
 import scala.collection.mutable
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 import scala.collection.mutable.ListBuffer
 
 /**

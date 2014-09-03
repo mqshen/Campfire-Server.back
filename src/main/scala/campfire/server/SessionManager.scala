@@ -12,7 +12,6 @@ object SessionManager {
   val sessionUserMap: mutable.Map[String, String] = new ConcurrentHashMap[String, String]().asScala
   val userSessionMap: mutable.Map[String, String] = new ConcurrentHashMap[String, String]().asScala
 
-
   def addSession(sessionId: String, userName: String) = {
     sessionUserMap += (sessionId -> userName)
     userSessionMap += (userName -> sessionId)
@@ -26,8 +25,8 @@ object SessionManager {
     sessionUserMap.get(sessionId)
   }
 
-  def removeBySessionId(sessionId: String)  {
-    sessionUserMap.remove(sessionId).map{ userName =>
+  def removeBySessionId(sessionId: String) {
+    sessionUserMap.remove(sessionId).map { userName =>
       userSessionMap.remove(userName)
     }
   }

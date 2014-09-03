@@ -5,9 +5,9 @@ import java.util.concurrent.ConcurrentHashMap
 import akka.actor._
 import akka.util.ByteString
 import campfire.session.Session
-import campfire.socketio.packet.{DataPacket, Packet}
+import campfire.socketio.packet.{ DataPacket, Packet }
 import campfire.socketio.transport.Transport
-import spray.http.{HttpOrigin, Uri}
+import spray.http.{ HttpOrigin, Uri }
 import scala.collection.JavaConverters._
 
 /**

@@ -3,7 +3,6 @@ package campfire.socketio
 import akka.actor.{ Props, ActorLogging, ActorRef }
 import akka.persistence._
 
-
 object PersistentConnectionActive {
   def props(namespaceMediator: ActorRef, broadcastMediator: ActorRef): Props = Props(classOf[PersistentConnectionActive], namespaceMediator, broadcastMediator)
 }
@@ -30,8 +29,8 @@ final class PersistentConnectionActive(val namespaceMediator: ActorRef, val broa
   }
 
   def receiveCommand: Receive = working orElse {
-    case SaveSnapshotSuccess(_) =>
-    case SaveSnapshotFailure(_, reason) => log.error("Failed to save snapshot: {}", reason)
+    case SaveSnapshotSuccess(_)           =>
+    case SaveSnapshotFailure(_, reason)   => log.error("Failed to save snapshot: {}", reason)
     case PersistenceFailure(_, _, reason) => log.error("Failed to persistence: {}", reason)
   }
 
@@ -42,5 +41,4 @@ final class PersistentConnectionActive(val namespaceMediator: ActorRef, val broa
     }
   }
 }
-
 

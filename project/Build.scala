@@ -39,26 +39,52 @@ object Dependencies {
   val SPRAY_VERSION = "1.3.2-20140428"
   val AKKA_VERSION = "2.3.4"
 
-  val spray_websocket = "com.wandoulabs.akka" %% "spray-websocket" % "0.1.2-RC3"
+  //val spray_websocket = "com.wandoulabs.akka" %% "spray-websocket" % "0.1.3-SNAPSHOT"
+  val spray_websocket = "com.wandoulabs.akka" %% "spray-websocket" % "0.1.2"
   val spray_can = "io.spray" % "spray-can" % SPRAY_VERSION
-  val spray_caching = "io.spray" % "spray-caching" % SPRAY_VERSION
-  val spray_json = "io.spray" % "spray-json_2.10" % "1.2.6"
+  //val spray_json = "io.spray" %% "spray-json" % "1.2.6"
   val akka_actor = "com.typesafe.akka" %% "akka-actor" % AKKA_VERSION
   val akka_contrib = "com.typesafe.akka" %% "akka-contrib" % AKKA_VERSION
-  val parboiled = "org.parboiled" %% "parboiled-scala" % "1.1.5"
+  val parboiled = "org.parboiled" %% "parboiled-scala" % "1.1.6"
   val parboiled2 = "org.parboiled" %% "parboiled" % "2.0-M2" //changing ()
   val akka_testkit = "com.typesafe.akka" %% "akka-testkit" % AKKA_VERSION % "test"
   val akka_multinode_testkit = "com.typesafe.akka" %% "akka-multi-node-testkit" % AKKA_VERSION % "test"
-  val scalatest = "org.scalatest" %% "scalatest" % "2.0" % "test"
+  val scalatest = "org.scalatest" %% "scalatest" % "2.2.1" % "test"
   val rxscala = "com.netflix.rxjava" % "rxjava-scala" % "0.17.1"
   val apache_math = "org.apache.commons" % "commons-math3" % "3.2" // % "test"
   val caliper = "com.google.caliper" % "caliper" % "0.5-rc1" % "test"
   val akka_persistence_cassandra =  "com.github.krasserm" %% "akka-persistence-cassandra" % "0.3.1"
-  val socketio     = "com.wandoulabs.akka" %% "spray-socketio" % "0.1.1-SNAPSHOT"
-  val reactivemongo = "org.reactivemongo" %% "reactivemongo" % "0.11.0-SNAPSHOT"
+  val socketio     = "com.wandoulabs.akka" %% "spray-socketio" % "0.1.3-SNAPSHOT"
+  val reactivemongo = "org.reactivemongo" %% "reactivemongo" % "0.10.5.akka23-SNAPSHOT"
+  val playFunctional = "com.typesafe.play" %% "play-iteratees" % "2.3.0"
+  val playIteratee = "com.typesafe.play" %% "play-functional" % "2.3.0"
+  val playJson = "com.typesafe.play" %% "play-json" % "2.3.0"
+  val jodatime = "joda-time" % "joda-time" % "2.3"
+  val jodaConvert = "org.joda" % "joda-convert" % "1.6"
 
-  val all = Seq(spray_websocket, spray_can, spray_caching, spray_json, akka_actor, akka_contrib, parboiled,
-    rxscala, akka_testkit, akka_multinode_testkit, scalatest, apache_math, caliper, socketio, reactivemongo )
+  val jacksons = Seq(
+    "jackson-core",
+    "jackson-annotations",
+    "jackson-databind"
+  ).map("com.fasterxml.jackson.core" % _ % "2.3.2")
+
+//  val all = Seq( spray_can, spray_caching, spray_json, akka_actor, akka_contrib, parboiled,
+//    rxscala, akka_testkit, akka_multinode_testkit, scalatest, apache_math, caliper, reactivemongo,
+//    playIteratee, playJson, jodatime, jodaConvert
+//    //, spray_websocket
+//  ) ++ jacksons
+val all = Seq(
+  spray_websocket,
+  spray_can,
+  //spray_json,
+  akka_actor, akka_contrib,
+  parboiled, jodatime,
+  rxscala, akka_testkit, akka_multinode_testkit,
+  //scalatest,
+  apache_math, caliper,
+  //socketio,
+  reactivemongo, playIteratee, playJson, jodaConvert
+) ++ jacksons
 }
 
 object Build extends sbt.Build {
@@ -66,7 +92,7 @@ object Build extends sbt.Build {
   lazy val basicSettings = Seq(
     organization := "goldratio",
     version := "0.1.0-SNAPSHOT",
-    scalaVersion := "2.10.3",
+    scalaVersion := "2.10.4",
     scalacOptions ++= Seq("-unchecked", "-deprecation"),
     resolvers ++= Seq(
       "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases",
@@ -77,7 +103,7 @@ object Build extends sbt.Build {
       "krasserm at bintray" at "http://dl.bintray.com/krasserm/maven")
   )
 
-  lazy val mainProject = Project( "akkaChat", file("."))
+  lazy val mainProject = Project( "Campfile", file("."))
     .settings(basicSettings: _*)
     .settings(formatSettings: _*)
     .settings(releaseSettings: _*)

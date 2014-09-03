@@ -3,16 +3,16 @@ package campfire
 import akka.actor.ActorRef
 import akka.event.LoggingAdapter
 import campfire.session.Session
-import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.config.{ Config, ConfigFactory }
 import spray.can.Http
 import spray.can.websocket.frame.TextFrame
-import campfire.socketio.{transport, ConnectionActive}
+import campfire.socketio.{ transport, ConnectionActive }
 import spray.http.HttpHeaders.Origin
 import spray.http._
 import scala.concurrent.duration._
 
-import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Failure, Success}
+import scala.concurrent.{ ExecutionContext, Future }
+import scala.util.{ Failure, Success }
 
 /**
  * Created by goldratio on 8/7/14.
@@ -49,13 +49,13 @@ package object socketio {
   val topicForDisconnect = "socketio-global-disconnect"
 
   private[socketio] final class SoConnectingContext(
-                                                     var sessionId: String,
-                                                     val sessionIdGenerator: HttpRequest => Future[String],
-                                                     val serverConnection: ActorRef,
-                                                     val socketioWorker: ActorRef,
-                                                     val resolver: ActorRef,
-                                                     val log: LoggingAdapter,
-                                                     implicit val ec: ExecutionContext)
+    var sessionId: String,
+    val sessionIdGenerator: HttpRequest => Future[String],
+    val serverConnection: ActorRef,
+    val socketioWorker: ActorRef,
+    val resolver: ActorRef,
+    val log: LoggingAdapter,
+    implicit val ec: ExecutionContext)
 
   final case class HandshakeState(response: HttpResponse, sessionId: String, qurey: Uri.Query, origins: Seq[HttpOrigin])
   /**

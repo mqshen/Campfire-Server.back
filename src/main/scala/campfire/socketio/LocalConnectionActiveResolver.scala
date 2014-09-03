@@ -28,12 +28,11 @@ class LocalConnectionActiveResolver(mediator: ActorRef, connectionActiveProps: P
           context.watch(connectActive)
       }
 
-
     case cmd: ConnectionActive.Command =>
       context.child(cmd.sessionId) match {
         case Some(ref) =>
           ref forward cmd
-        case None      =>
+        case None =>
           log.warning("Failed to select actor {}", cmd.sessionId)
       }
 
